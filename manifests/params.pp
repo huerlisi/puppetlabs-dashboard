@@ -36,10 +36,16 @@ class dashboard::params {
     }
 
     'Debian': {
-      $dashboard_config       = '/etc/default/puppet-dashboard'
-      $dashboard_service      = 'puppet-dashboard'
-      $dashboard_package      = 'puppet-dashboard'
-      $dashboard_root         = '/usr/share/puppet-dashboard'
+      $dashboard_config          = '/etc/default/puppet-dashboard'
+      $dashboard_service         = 'puppet-dashboard'
+      $dashboard_package         = 'puppet-dashboard'
+      $dashboard_root            = '/usr/share/puppet-dashboard'
+      $dashboard_workers_service = 'puppet-dashboard-workers'
+      $dashboard_workers_config  = '/etc/default/puppet-dashboard-workers'
+      $dashboard_num_workers     = '4'
+      $dashboard_workers_start   = 'yes'
+      $mysql_package_provider    = 'aptitude'
+      $ruby_mysql_package        = 'libmysql-ruby1.8'
     }
 
     default: {

@@ -4,8 +4,8 @@
 #
 # Parameters:
 #   [*passenger_install*]
-#     - Install passenger using puppetlabs/passenger module or assume it is 
-#       installed by 3rd party 
+#     - Install passenger using puppetlabs/passenger module or assume it is
+#       installed by 3rd party
 #   [*dashboard_site*]
 #     - The ServerName setting for Apache
 #
@@ -45,10 +45,15 @@ class dashboard::passenger (
     ensure => absent,
   }
 
-  file { 'dashboard_config':
-    ensure => absent,
-    path   => $dashboard_config,
+  # in debian, the dashboard workers config sources the main config.
+  # so we need to keep it
+  if $::osfamily != 'Debian' {
+    file { 'dashboard_config':
+      ensure => absent,
+      path   => $dashboard_config,
+    }
   }
+
 
   apache::vhost { $dashboard_site:
     port              => $dashboard_port,
